@@ -54,7 +54,7 @@ def onIncrement(counter):
 
 def main():
     root = tk.Tk()
-    root.title("Serial USB Temperature Data Collector")
+    root.title("Serial USB IMU/Pressure Sensor Data Collector")
     mainframe = ttk.Frame(root)
     mainframe.grid(column=0, row=0, sticky=(tk.N, tk.W, tk.E, tk.S))
     mainframe.pack()

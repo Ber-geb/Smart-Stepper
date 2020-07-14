@@ -113,7 +113,8 @@ void sendSensorData() {
     IMU.readAcceleration(ax, ay, az);
     IMU.readGyroscope(gx, gy, gz);
     //IMU.readMagneticField(mx, my, mz);
-    filter.update(gx, gy, gz, ax, ay, az, mx, my, mz); //for all 3
+    //filter.update(gx, gy, gz, ax, ay, az, mx, my, mz); //for all 3'
+    filter.updateIMU(gx, gy, gz, ax, ay, az);
     roll = filter.getRoll();
     pitch = filter.getPitch();
     heading = filter.getYaw();
