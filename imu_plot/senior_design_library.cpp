@@ -1,5 +1,5 @@
 #include <ArduinoBLE.h>
-#include <Arduino_LSM6DS3.h>
+#include <Arduino_LSM9DS1.h>
 #include <MadgwickAHRS.h>
 #include "senior_design_library.h"
 
@@ -112,9 +112,9 @@ void sendSensorData() {
     // read orientation x, y and z eulers
     IMU.readAcceleration(ax, ay, az);
     IMU.readGyroscope(gx, gy, gz);
-    //IMU.readMagneticField(mx, my, mz);
-    //filter.update(gx, gy, gz, ax, ay, az, mx, my, mz); //for all 3'
-    filter.updateIMU(gx, gy, gz, ax, ay, az);
+    IMU.readMagneticField(mx, my, mz);
+    filter.update(gx, gy, gz, ax, ay, az, mx, my, mz); //for all 3'
+    //filter.updateIMU(gx, gy, gz, ax, ay, az);
     roll = filter.getRoll();
     pitch = filter.getPitch();
     heading = filter.getYaw();

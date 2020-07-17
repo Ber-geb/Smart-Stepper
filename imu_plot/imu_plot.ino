@@ -1,5 +1,5 @@
 #include <ArduinoBLE.h>
-#include <Arduino_LSM6DS3.h>
+#include <Arduino_LSM9DS1.h>
 #include <MadgwickAHRS.h>
 #include "./senior_design_library.h"
 
@@ -104,7 +104,7 @@ void loop() {
       }
 
       char report[80];
-      sprintf(report, "pressure: %5d   position: %5d\n",
+      sprintf(report, "pressure: %5lu   position: %5lu\n",
               pressure, position);
       
       sendSensorData();
