@@ -62,7 +62,7 @@ void setup() {
 
   // start advertising
   BLE.advertise();
-  Serial.println("Bluetooth device active, waiting for connections...");
+//  Serial.println("Bluetooth device active, waiting for connections...");
 
   micros_per_reading = 1000000 / 119;
   micros_previous = micros();
@@ -76,9 +76,9 @@ void loop() {
 
   // if a BLE central is connected to the peripheral:
   if (central) {
-    Serial.print("Connected to central: ");
+//    Serial.print("Connected to central: ");
     // print the central's BT address:
-    Serial.println(central.address());
+//    Serial.println(central.address());
     // turn on the LED to indicate the connection:
     digitalWrite(LED_BUILTIN, HIGH);
 
