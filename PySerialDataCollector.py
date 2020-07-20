@@ -21,19 +21,24 @@ def timer(sp, interval):
     global f
     while running:
         # sleep(interval)
-        line = sp.readline().decode("utf-8").split(",")
+
+        line = sp.readline().decode("utf-8")
+        line = line.replace("\r", "").replace("\n", "")
+        line = line.split(",")
+        imuDict = dict(zip(labels, line))
+        print(imuDict)
         # data = [str(val) for val in line.split(' ')]
         # t = time.strftime("%Y-%m-%d %H:%M:%S")
         # newRow = "%s,%s,%s\n" % (t, data[0], data[1])
         # newRow = "%s,%s\n" % (t, line)
         # with open(f.name, "a") as datafile:
-            # datafile.write(newRow)
-        datafile.writerow(newRow)
+        # datafile.write(newRow)
+        writer.writerow(imuDict)
 
 
 def collect(strPort, interval):
     global f
-    global datafile 
+    global datafile
     global writer
     # Ask for a location to save the CSV file
     f = fd.asksaveasfile(mode='w', defaultextension=".csv")
@@ -46,7 +51,8 @@ def collect(strPort, interval):
         # File does not exist yet
         pass
     datafile = open(f.name, "a")
-    writer = csv.DictWriter(datafile, fieldnames=labels, delimiter="\t")
+    writer = csv.DictWriter(datafile, fieldnames=labels,
+                            delimiter=",", lineterminator='\n')
     writer.writeheader()
     sp = serial.Serial(strPort, 115200)
     time_thread = Thread(target=timer, args=(sp, interval))
@@ -55,6 +61,7 @@ def collect(strPort, interval):
 
 def end():
     global running
+    datafile.close()
     running = False
 
 
@@ -94,7 +101,7 @@ def main():
     duration_increment.grid(row=1, column=0)
     collect_button = ttk.Button(mainframe, text="Begin Data Collection",
                                 command=lambda: collect(serial_var.get(),
-                                                        counter.get()))                            
+                                                        counter.get()))
     collect_button.grid(row=2, column=0, sticky=(tk.E, tk.W))
     end_button = ttk.Button(mainframe, text="End Data Collection",
                             command=lambda: end())
