@@ -127,7 +127,7 @@ void sendSensorData() {
     //  Serial.println(roll);
 
     // Send 3x eulers over bluetooth as 1x byte array
-    String imuData = String(heading) + "|" + String(pitch) + "|" + String(roll);
+    String imuData = String(roll) + "," +  String(pitch) + "," + String(heading);
     Serial.println(imuData);
     imuCharacteristic.writeValue(imuData);
   }
