@@ -1,8 +1,11 @@
 from bluepy.btle import Peripheral, UUID, BTLEDisconnectError, DefaultDelegate
 import time
+import csv
 
 f = ""
 filename = ""
+writer = ""
+labels = ["X", "Y", "Z"]
 
 class NotificationDelegate(DefaultDelegate):
     def __init__(self):
@@ -10,17 +13,21 @@ class NotificationDelegate(DefaultDelegate):
 
     def handleNotification(self, cHandle, data):
         global filename
+        global csv_f
         # f = fd.asksaveasfile(mode='w', defaultextension=".csv")
         
         # xyz = data.decode().split('|')
         # print("X = {xyz[0]}, Y = {xyz[1]}, Z = {xyz[2]}")
         # xyz = data.decode("utf-8")
         # xyz = data.decode().split(',')
-        xyz = data.decode("utf-8")
-        print(xyz)
+        xyz = data.decode("utf-8").split(',')
+        imuDict = dict(zip(labels,xyz))
+        print(imuDict)
+        writer.writerow(imuDict)
+        # csv_f.writerow(xyz)
         # with open(filename, "a") as datafile:
         #     datafile.write(xyz)
-        f.write(str(xyz) + "\n")
+        # f.write(str(xyz) + "\n")
         
 
 try:
@@ -30,8 +37,13 @@ except BTLEDisconnectError as error:
     print(error)
     print("Peripheral not found. Is it ON?")
 else:
-    filename = time.strftime("%Y%m%d_%H%M%S")
+    filename = time.strftime("%Y%m%d_%H%M%S.csv")
     f = open(filename, "a")
+    writer = csv.DictWriter(f, fieldnames=labels, delimiter="\t")
+    writer.writeheader()
+    # writer = csv.writer(f, delimiter='\t')
+    # fieldnames = ['X','Y','Z']
+    # csv_f = csv.DictWriter(f, fieldnames=fieldnames)
     #services = arduino.getServices()
     characteristics = arduino.getCharacteristics()
     for characteristic in characteristics:
