@@ -51,7 +51,7 @@
           fillGraph: true,
           pointSize: 3,
           stepPlot: false,
-          ylabel: "Heading, Pitch, Rol"
+          ylabel: "Heading, Pitch, Roll"
           //pixelsPerLabel: 10,
         });
     });
@@ -120,7 +120,7 @@
       if (error) console.log('error: ', error);
       console.log('value: ', value);
       myValue = value;
-      var acceleration = myValue.split('|');
+      var acceleration = myValue.split(',');
       console.log('IMU: ', acceleration);
       plot(parseFloat(acceleration[0]), parseFloat(acceleration[1]), parseFloat(acceleration[2]));
       // After getting a value, call p5ble.read() again to get the value again

@@ -15,6 +15,7 @@ f = ""
 datafile = ""
 writer = ""
 labels = ["X", "Y", "Z"]
+root = ""
 
 
 def timer(sp, interval):
@@ -58,11 +59,28 @@ def collect(strPort, interval):
     time_thread = Thread(target=timer, args=(sp, interval))
     time_thread.start()
 
+def qf(root):
+    # datafile.close()
+    root.destroy()
+    main()
+
+def nf(root):
+    global running 
+
+    running = False
+    root.destroy()
+    # datafile.close()
+
 
 def end():
     global running
-    datafile.close()
-    running = False
+    
+    tk.Label(root, text = "Do you want to start another trial?").pack()
+    b = tk.Button(root, text="Yes", command=lambda: qf(root))
+    c = tk.Button(root, text="No", command=lambda: nf(root))
+    b.pack()
+    c.pack()
+    
 
 
 def onIncrement(counter):
@@ -70,6 +88,7 @@ def onIncrement(counter):
 
 
 def main():
+    global root
     root = tk.Tk()
     root.title("Serial USB IMU/Pressure Sensor Data Collector")
     mainframe = ttk.Frame(root)
