@@ -74,7 +74,10 @@ def nf(root):
 
 def end():
     global running
-    
+    global datafile
+
+    datafile.close()
+    datafile = ""
     tk.Label(root, text = "Do you want to start another trial?").pack()
     b = tk.Button(root, text="Yes", command=lambda: qf(root))
     c = tk.Button(root, text="No", command=lambda: nf(root))
