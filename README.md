@@ -4,4 +4,4 @@
 ![Toe Walking](tenor.gif)
 
 
-![Toe Walking Gait Analysis](https://j.gifs.com/2xBJ01.gif)
+![Toe Walking Gait Analysis](https://gifs.com/gif/toe-walking-gait-analysis-2xBJ01)
