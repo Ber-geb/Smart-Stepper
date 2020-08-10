@@ -1,6 +1,6 @@
 # This code is used to visualize the csv files 
 # NOTE: REMEMBER TO REMOVE THE FIRST ROW OF THE CSV FILE YOU ARE 
-#       TRYING TO TEST (the column with X, Y, Z)
+#       TRYING TO TEST (i.e. the row with X, Y, Z)
 
 import matplotlib.pyplot as plt
 import csv
