@@ -11,7 +11,7 @@ y = []
 z = []
 increment = 0
 
-with open('1.csv', 'r') as csvfile:
+with open('test.csv', 'r') as csvfile:
     plots = csv.reader(csvfile)
     for row in plots:
         x.append(row[0])
