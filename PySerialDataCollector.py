@@ -6,6 +6,7 @@ import tkinter as tk
 import time
 from threading import Thread
 from time import sleep
+from itertools import islice
 from tkinter import filedialog as fd
 from tkinter import ttk
 import csv
@@ -16,13 +17,14 @@ datafile = ""
 writer = ""
 labels = ["X", "Y", "Z"]
 root = ""
+isFirst = True
 
 
 def timer(sp, interval):
     global f
+    writer.writerow({'X': '-', 'Y': '-', 'Z': '-'})
     while running:
         # sleep(interval)
-
         line = sp.readline().decode("utf-8")
         line = line.replace("\r", "").replace("\n", "")
         line = line.split(",")
@@ -41,8 +43,10 @@ def collect(strPort, interval):
     global f
     global datafile
     global writer
+    global isFirst
     # Ask for a location to save the CSV file
-    f = fd.asksaveasfile(mode='w', defaultextension=".csv")
+    if isFirst:
+        f = fd.asksaveasfile(mode='w', defaultextension=".csv")
     if f is None:  # User canceled save dialog
         return
     # Overwrite existing file
@@ -52,20 +56,30 @@ def collect(strPort, interval):
         # File does not exist yet
         pass
     datafile = open(f.name, "a")
+    temp = csv.DictWriter(datafile, fieldnames=labels, lineterminator='\n',
+                          delimiter='\n', quotechar='', quoting=csv.QUOTE_NONE, escapechar='\n')
+    if not isFirst:
+        for i in range(10):
+            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
     writer = csv.DictWriter(datafile, fieldnames=labels,
                             delimiter=",", lineterminator='\n')
-    writer.writeheader()
+
+    # writer.writeheader()
     sp = serial.Serial(strPort, 115200)
     time_thread = Thread(target=timer, args=(sp, interval))
     time_thread.start()
 
+
 def qf(root):
+    global isFirst
     # datafile.close()
+    isFirst = False
     root.destroy()
     main()
 
+
 def nf(root):
-    global running 
+    global running
 
     running = False
     root.destroy()
@@ -78,12 +92,11 @@ def end():
 
     datafile.close()
     datafile = ""
-    tk.Label(root, text = "Do you want to start another trial?").pack()
+    tk.Label(root, text="Do you want to start another trial?").pack()
     b = tk.Button(root, text="Yes", command=lambda: qf(root))
     c = tk.Button(root, text="No", command=lambda: nf(root))
     b.pack()
     c.pack()
-    
 
 
 def onIncrement(counter):

@@ -1,6 +1,8 @@
-# This code is used to visualize the csv files 
-# NOTE: REMEMBER TO REMOVE THE FIRST ROW OF THE CSV FILE YOU ARE 
+# This code is used to visualize the csv files
+# NOTE: REMEMBER TO REMOVE THE FIRST ROW OF THE CSV FILE YOU ARE
 #       TRYING TO TEST (i.e. the row with X, Y, Z)
+
+# UPDATE: Code is not working as intended...hopefully I can fix it later on
 
 import matplotlib.pyplot as plt
 import csv
@@ -22,7 +24,7 @@ with open('test.csv', 'r') as csvfile:
 
 plt.plot(z, x, label='Loaded from file!', scaley=True)
 plt.plot(z, y, label='Loaded from file!', scaley=True)
-plt.yticks(np.arange(0,110,step=10))
+plt.yticks(np.arange(0, 110, step=10))
 plt.xticks([])
 plt.yticks([])
 
