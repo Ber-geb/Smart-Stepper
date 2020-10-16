@@ -5,10 +5,13 @@ motion needs to be accomplished (i.e. standing, walking, sitting, etc.)
 
 - Commands:
   w = walking
-  s = standing
   t = toe-walking
+  s = standing
+  p = toe-standing
   r = running
+  y = toe-running
   a = sitting
+  z = toe-sitting
   l = laying down
   j = jumping
 

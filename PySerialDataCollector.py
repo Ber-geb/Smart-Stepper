@@ -30,12 +30,17 @@ def on_release(key):
         for i in range(10):
             temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
         temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+    elif (key.char == 't'):  # toe-walking
+        print(key)
+        for i in range(10):
+            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
+        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
     elif (key.char == 's'):  # standing
         print(key)
         for i in range(10):
             temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
         temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
-    elif (key.char == 't'):  # toe-walking
+    elif (key.char == 'p'):  # toe-standing
         print(key)
         for i in range(10):
             temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
@@ -45,7 +50,17 @@ def on_release(key):
         for i in range(10):
             temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
         temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+    elif (key.char == 'y'):  # toe-running
+        print(key)
+        for i in range(10):
+            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
+        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
     elif (key.char == 'a'):  # sitting
+        print(key)
+        for i in range(10):
+            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
+        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+    elif (key.char == 'z'):  # toe-sitting
         print(key)
         for i in range(10):
             temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
