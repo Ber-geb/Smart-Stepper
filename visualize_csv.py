@@ -45,7 +45,7 @@ plt.plot(x, color="red", label="Heading(X)")
 plt.plot(y, color="blue", label="Pitch(Y)")
 plt.plot(z, color="green", label="Roll(Z)")
 
-plt.legend(loc=1, ncol=1)
+plt.legend(loc=1, bbox_to_anchor=(1.11, 1.15), ncol=1, fontsize="small")
 plt.show()
 
 
