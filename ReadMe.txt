@@ -1,5 +1,20 @@
 *****Notes*****
 
+- Now PySerialDataCollector detects certain key presses when a certain  
+motion needs to be accomplished (i.e. standing, walking, sitting, etc.)
+
+- Commands:
+  w = walking
+  s = standing
+  t = toe-walking
+  r = running
+  a = sitting
+  l = laying down
+  j = jumping
+
+
+Old Notes:
+
 - 10 trials for each person in normal walking, 5 trials for each person during sitting/standing positions
 
 

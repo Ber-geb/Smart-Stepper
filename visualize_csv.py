@@ -1,35 +1,62 @@
 # This code is used to visualize the csv files
-# NOTE: REMEMBER TO REMOVE THE FIRST ROW OF THE CSV FILE YOU ARE
-#       TRYING TO TEST (i.e. the row with X, Y, Z)
 
 # UPDATE: Code is not working as intended...hopefully I can fix it later on
+# UPDATE 2: Code is now working... Yay!
 
 import matplotlib.pyplot as plt
 import csv
 import numpy as np
+import tkinter as tk
+from tkinter import filedialog
+
+root = tk.Tk()
+root.withdraw()
+
+file_path = filedialog.askopenfilename()
 
 x = []
 y = []
 z = []
-increment = 0
+size = 0
 
-with open('test.csv', 'r') as csvfile:
-    plots = csv.reader(csvfile)
-    for row in plots:
-        x.append(row[0])
-        y.append(row[1])
-        z.append(increment)
-        increment += 1
+root.destroy()
+with open(file_path, 'r') as filestream:
+    for line in filestream:
+        currentline = line.replace("\n", "").split(",")
+        if len(currentline) <= 2 or currentline[0] == '-':
+            continue
+        else:
+            x.append(float(currentline[0]))
+            y.append(float(currentline[1]))
+            z.append(float(currentline[2]))
+            size += 1
 
+# style
+plt.style.use('seaborn-darkgrid')
 
-plt.plot(z, x, label='Loaded from file!', scaley=True)
-plt.plot(z, y, label='Loaded from file!', scaley=True)
-plt.yticks(np.arange(0, 110, step=10))
-plt.xticks([])
-plt.yticks([])
+# create a color palette
+palette = plt.get_cmap('Set1')
 
-plt.xlabel('Time')
-plt.ylabel('Heading, Pitch, Roll')
-plt.title('Interesting Graph\nCheck it out')
-plt.legend()
+plt.title("Visual Representation of Walking Pattern")
+plt.xlabel("Time")
+plt.ylabel("Heading, Pitch, Roll")
+
+plt.plot(x, color="red", label="Heading(X)")
+plt.plot(y, color="blue", label="Pitch(Y)")
+plt.plot(z, color="green", label="Roll(Z)")
+
+plt.legend(loc=1, ncol=1)
 plt.show()
+
+
+# plt.plot(z, x, label='Loaded from file!', scaley=True)
+# plt.plot(z, y, label='Loaded from file!', scaley=True)
+# plt.yticks(np.arange(0, 110, step=10))
+# plt.xticks([])
+# plt.yticks([])
+
+# plt.xlabel('Time')
+# plt.ylabel('Heading, Pitch, Roll')
+# plt.title('Interesting Graph\nCheck it out')
+# plt.legend()
+# plt.show()

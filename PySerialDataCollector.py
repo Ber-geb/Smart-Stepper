@@ -11,6 +11,7 @@ from tkinter import filedialog as fd
 from tkinter import ttk
 import csv
 import keyboard
+from pynput.keyboard import Key, Listener
 
 running = True
 f = ""
@@ -21,81 +22,86 @@ root = ""
 isFirst = True
 
 
+def on_release(key):
+    temp = csv.DictWriter(datafile, fieldnames=labels, lineterminator='\n',
+                          delimiter='\n', quotechar='', quoting=csv.QUOTE_NONE, escapechar='\n')
+    if (key.char == 'a'):  # walking
+        print(key)
+        for i in range(10):
+            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
+        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+    elif (key.char == 's'):  # standing
+        print(key)
+        for i in range(10):
+            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
+        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+    elif (key.char == 't'):  # toe-walking
+        print(key)
+        for i in range(10):
+            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
+        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+    elif (key.char == 'r'):  # running
+        print(key)
+        for i in range(10):
+            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
+        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+    elif (key.char == 'a'):  # sitting
+        print(key)
+        for i in range(10):
+            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
+        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+    elif (key.char == 'l'):  # laying down flat
+        print(key)
+        for i in range(10):
+            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
+        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+    elif (key.char == 'j'):  # jumping
+        print(key)
+        for i in range(10):
+            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
+        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+    # elif (key == Key.esc):
+    #     return False
+    return True
+
+
 def timer(sp, interval):
     global f
     writer.writerow({'X': '-', 'Y': '-', 'Z': '-'})
-    temp = csv.DictWriter(datafile, fieldnames=labels, lineterminator='\n',
-                          delimiter='\n', quotechar='', quoting=csv.QUOTE_NONE, escapechar='\n')
-    while running:
-        if (keyboard.is_pressed('w')):  # walking
-            keyboard.wait('esc')
-            print('w')
-            for i in range(10):
-                temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-            temp.writerow({'X': 'w', 'Y': '', 'Z': '\n'})
-        elif (keyboard.is_pressed('s')):  # standing
-            keyboard.wait('esc')
-            print('s')
-            for i in range(10):
-                temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-            temp.writerow({'X': 's', 'Y': '', 'Z': '\n'})
-        elif (keyboard.is_pressed('t')):  # toe-walking
-            keyboard.wait('esc')
-            print('t')
-            for i in range(10):
-                temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-            temp.writerow({'X': 't', 'Y': '', 'Z': '\n'})
-        elif (keyboard.is_pressed('r')):  # running
-            keyboard.wait('esc')
-            print('r')
-            for i in range(10):
-                temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-            temp.writerow({'X': 'r', 'Y': '', 'Z': '\n'})
-        elif (keyboard.is_pressed('a')):  # sitting
-            keyboard.wait('esc')
-            print('a')
-            for i in range(10):
-                temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-            temp.writerow({'X': 'a', 'Y': '', 'Z': '\n'})
-        elif (keyboard.is_pressed('l')):  # laying down flat
-            keyboard.wait('esc')
-            print('l')
-            for i in range(10):
-                temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-            temp.writerow({'X': 'l', 'Y': '', 'Z': '\n'})
-        elif (keyboard.is_pressed('j')):  # jumping
-            keyboard.wait('esc')
-            print('j')
-            for i in range(10):
-                temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-            temp.writerow({'X': 'j', 'Y': '', 'Z': '\n'})
-
-        # sleep(interval)
-        line = sp.readline().decode("utf-8")
-        line = line.replace("\r", "").replace("\n", "")
-        line = line.split(",")
-        imuDict = dict(zip(labels, line))
-        print(imuDict)
-        # data = [str(val) for val in line.split(' ')]
-        # t = time.strftime("%Y-%m-%d %H:%M:%S")
-        # newRow = "%s,%s,%s\n" % (t, data[0], data[1])
-        # newRow = "%s,%s\n" % (t, line)
-        # with open(f.name, "a") as datafile:
-        # datafile.write(newRow)
-        try:
-            writer.writerow(imuDict)
-        except Exception:
-            break
+    # temp = csv.DictWriter(datafile, fieldnames=labels, lineterminator='\n',
+    #                       delimiter='\n', quotechar='', quoting=csv.QUOTE_NONE, escapechar='\n')
+    with Listener(
+        on_release=on_release
+    ) as listener:
+        while running:
+            # sleep(interval)
+            line = sp.readline().decode("utf-8")
+            line = line.replace("\r", "").replace("\n", "")
+            line = line.split(",")
+            imuDict = dict(zip(labels, line))
+            print(imuDict)
+            # data = [str(val) for val in line.split(' ')]
+            # t = time.strftime("%Y-%m-%d %H:%M:%S")
+            # newRow = "%s,%s,%s\n" % (t, data[0], data[1])
+            # newRow = "%s,%s\n" % (t, line)
+            # with open(f.name, "a") as datafile:
+            # datafile.write(newRow)
+            try:
+                writer.writerow(imuDict)
+            except Exception:
+                break
+            # listener.join()
 
 
 def collect(strPort, interval):
     global f
     global datafile
     global writer
-    global isFirst
+    # global isFirst
     # Ask for a location to save the CSV file
-    if isFirst:
-        f = fd.asksaveasfile(mode='w', defaultextension=".csv")
+    # if isFirst:
+    # f = fd.asksaveasfile(mode='w', defaultextension=".csv")
+    f = fd.asksaveasfile(mode='w', defaultextension=".txt")
     if f is None:  # User canceled save dialog
         return
     # Overwrite existing file
@@ -107,9 +113,9 @@ def collect(strPort, interval):
     datafile = open(f.name, "a")
     temp = csv.DictWriter(datafile, fieldnames=labels, lineterminator='\n',
                           delimiter='\n', quotechar='', quoting=csv.QUOTE_NONE, escapechar='\n')
-    if not isFirst:
-        for i in range(10):
-            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
+    # if not isFirst:
+    #     for i in range(10):
+    #         temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
     writer = csv.DictWriter(datafile, fieldnames=labels,
                             delimiter=",", lineterminator='\n')
 
@@ -118,7 +124,7 @@ def collect(strPort, interval):
 
     time_thread = Thread(target=timer, args=(sp, interval))
     time_thread.start()
-    print(threading.activeCount())
+    print("Thread Count:", threading.activeCount())
 
 
 def qf(root):
