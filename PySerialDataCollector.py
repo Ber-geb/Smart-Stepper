@@ -25,7 +25,7 @@ isFirst = True
 def on_release(key):
     temp = csv.DictWriter(datafile, fieldnames=labels, lineterminator='\n',
                           delimiter='\n', quotechar='', quoting=csv.QUOTE_NONE, escapechar='\n')
-    if (key.char == 'a'):  # walking
+    if (key.char == 'w'):  # walking
         print(key)
         for i in range(10):
             temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
@@ -71,6 +71,26 @@ def on_release(key):
             temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
         temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
     elif (key.char == 'j'):  # jumping
+        print(key)
+        for i in range(10):
+            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
+        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+    elif (key.char == 'h'):  # Normal walking stair-up
+        print(key)
+        for i in range(10):
+            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
+        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+    elif (key.char == 'i'):  # Normal walking stair-down
+        print(key)
+        for i in range(10):
+            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
+        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+    elif (key.char == 'b'):  # toe stair-up
+        print(key)
+        for i in range(10):
+            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
+        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+    elif (key.char == 'd'):  #toe  stair-down
         print(key)
         for i in range(10):
             temp.writerow({'X': '', 'Y': '', 'Z': '\n'})

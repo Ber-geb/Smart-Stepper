@@ -14,6 +14,10 @@ motion needs to be accomplished (i.e. standing, walking, sitting, etc.)
   z = toe-sitting
   l = laying down
   j = jumping
+  h = stair-up
+  i = stair-down
+  b = toe stair up
+  d = toe stair down
 
 
 Old Notes:
