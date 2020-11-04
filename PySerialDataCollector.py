@@ -17,7 +17,7 @@ running = True
 f = ""
 datafile = ""
 writer = ""
-labels = ["X", "Y", "Z"]
+labels = ["Ax", "Ay", "Az", "Gx", "Gy", "Gz", "Abs_Accel", "Abs_Gyro", "Pp", "Px", "P1", "P2"]
 root = ""
 isFirst = True
 
@@ -28,73 +28,125 @@ def on_release(key):
     if (key.char == 'w'):  # walking
         print(key)
         for i in range(10):
-            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+            temp.writerow({'Ax': '', 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '', 'Px': '', 'P1': '', 'P2': '\n'})
+        temp.writerow({'Ax': key, 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '', 'Px': '', 'P1': '', 'P2': '\n'})
     elif (key.char == 't'):  # toe-walking
         print(key)
         for i in range(10):
-            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+            temp.writerow(
+                {'Ax': '', 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+                 'Px': '', 'P1': '', 'P2': '\n'})
+        temp.writerow(
+            {'Ax': key, 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+             'Px': '', 'P1': '', 'P2': '\n'})
     elif (key.char == 's'):  # standing
         print(key)
         for i in range(10):
-            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+            temp.writerow(
+                {'Ax': '', 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+                 'Px': '', 'P1': '', 'P2': '\n'})
+        temp.writerow(
+            {'Ax': key, 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+             'Px': '', 'P1': '', 'P2': '\n'})
     elif (key.char == 'p'):  # toe-standing
         print(key)
         for i in range(10):
-            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+            temp.writerow(
+                {'Ax': '', 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+                 'Px': '', 'P1': '', 'P2': '\n'})
+        temp.writerow(
+            {'Ax': key, 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+             'Px': '', 'P1': '', 'P2': '\n'})
     elif (key.char == 'r'):  # running
         print(key)
         for i in range(10):
-            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+            temp.writerow(
+                {'Ax': '', 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+                 'Px': '', 'P1': '', 'P2': '\n'})
+        temp.writerow(
+            {'Ax': key, 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+             'Px': '', 'P1': '', 'P2': '\n'})
     elif (key.char == 'y'):  # toe-running
         print(key)
         for i in range(10):
-            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+            temp.writerow(
+                {'Ax': '', 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+                 'Px': '', 'P1': '', 'P2': '\n'})
+        temp.writerow(
+            {'Ax': key, 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+             'Px': '', 'P1': '', 'P2': '\n'})
     elif (key.char == 'a'):  # sitting
         print(key)
         for i in range(10):
-            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+            temp.writerow(
+                {'Ax': '', 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+                 'Px': '', 'P1': '', 'P2': '\n'})
+        temp.writerow(
+            {'Ax': key, 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+             'Px': '', 'P1': '', 'P2': '\n'})
     elif (key.char == 'z'):  # toe-sitting
         print(key)
         for i in range(10):
-            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+            temp.writerow(
+                {'Ax': '', 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+                 'Px': '', 'P1': '', 'P2': '\n'})
+        temp.writerow(
+            {'Ax': key, 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+             'Px': '', 'P1': '', 'P2': '\n'})
     elif (key.char == 'l'):  # laying down flat
         print(key)
         for i in range(10):
-            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+            temp.writerow(
+                {'Ax': '', 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+                 'Px': '', 'P1': '', 'P2': '\n'})
+        temp.writerow(
+            {'Ax': key, 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+             'Px': '', 'P1': '', 'P2': '\n'})
     elif (key.char == 'j'):  # jumping
         print(key)
         for i in range(10):
-            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+            temp.writerow(
+                {'Ax': '', 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+                 'Px': '', 'P1': '', 'P2': '\n'})
+        temp.writerow(
+            {'Ax': key, 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+             'Px': '', 'P1': '', 'P2': '\n'})
     elif (key.char == 'h'):  # Normal walking stair-up
         print(key)
         for i in range(10):
-            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+            temp.writerow(
+                {'Ax': '', 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+                 'Px': '', 'P1': '', 'P2': '\n'})
+        temp.writerow(
+            {'Ax': key, 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+             'Px': '', 'P1': '', 'P2': '\n'})
     elif (key.char == 'i'):  # Normal walking stair-down
         print(key)
         for i in range(10):
-            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+            temp.writerow(
+                {'Ax': '', 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+                 'Px': '', 'P1': '', 'P2': '\n'})
+        temp.writerow(
+            {'Ax': key, 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+             'Px': '', 'P1': '', 'P2': '\n'})
     elif (key.char == 'b'):  # toe stair-up
         print(key)
         for i in range(10):
-            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+            temp.writerow(
+                {'Ax': '', 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+                 'Px': '', 'P1': '', 'P2': '\n'})
+        temp.writerow(
+            {'Ax': key, 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+             'Px': '', 'P1': '', 'P2': '\n'})
     elif (key.char == 'd'):  #toe  stair-down
         print(key)
         for i in range(10):
-            temp.writerow({'X': '', 'Y': '', 'Z': '\n'})
-        temp.writerow({'X': key, 'Y': '', 'Z': '\n'})
+            temp.writerow(
+                {'Ax': '', 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+                 'Px': '', 'P1': '', 'P2': '\n'})
+        temp.writerow(
+            {'Ax': key, 'Ay': '', 'Az': '', 'Gx': '', 'Gy': '', 'Gz': '', 'Abs_Accel': '', 'Abs_Gyro': '', 'Pp': '',
+             'Px': '', 'P1': '', 'P2': '\n'})
     # elif (key == Key.esc):
     #     return False
     return True
@@ -102,7 +154,7 @@ def on_release(key):
 
 def timer(sp, interval):
     global f
-    writer.writerow({'X': '-', 'Y': '-', 'Z': '-'})
+    writer.writerow({'Ax': '-', 'Ay': '-', 'Az': '-', 'Gx': '-', 'Gy': '-', 'Gz': '-', 'Abs_Accel': '-', 'Abs_Gyro': '-', 'Pp': '-', 'Px': '-', 'P1': '-', 'P2': '-'})
     # temp = csv.DictWriter(datafile, fieldnames=labels, lineterminator='\n',
     #                       delimiter='\n', quotechar='', quoting=csv.QUOTE_NONE, escapechar='\n')
     with Listener(
