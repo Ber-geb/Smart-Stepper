@@ -1,14 +1,10 @@
-#include <ArduinoBLE.h>
 #include <Arduino_LSM9DS1.h>
-#include <MadgwickAHRS.h>
+//#include <MadgwickAHRS.h>
 #include "senior_design_library.h"
 
 
-extern Madgwick filter;
-extern float roll, pitch, heading;
-
-extern BLEService imuService;
-extern BLEStringCharacteristic imuCharacteristic;
+//extern Madgwick filter;
+//extern float roll, pitch, heading;
 
 
 // Performs an ADC reading on the internal GND channel in order
@@ -102,22 +98,22 @@ int fslpGetPressure()
 }
 
 // send IMU data
-void sendSensorData() {
- 
-
+void sendSensorData() 
+{
   float ax, ay, az; // Acceleration
   float gx, gy, gz; // Gyroscope
-  float mx, my, mz; // Magnometer
-  if (IMU.accelerationAvailable()) {
+  float abs_acc, abs_gyro; // Absolute accelerometer and gyroscope
+ 
+  if (IMU.accelerationAvailable() && IMU.gyroscopeAvailable()) {
     // read orientation x, y and z eulers
     IMU.readAcceleration(ax, ay, az);
     IMU.readGyroscope(gx, gy, gz);
-    IMU.readMagneticField(mx, my, mz);
-    filter.update(gx, gy, gz, ax, ay, az, mx, my, mz); //for all 3'
+    //IMU.readMagneticField(mx, my, mz);
+    //filter.update(gx, gy, gz, ax, ay, az, mx, my, mz); //for all 3'
     //filter.updateIMU(gx, gy, gz, ax, ay, az);
-    roll = filter.getRoll();
-    pitch = filter.getPitch();
-    heading = filter.getYaw();
+    //roll = filter.getRoll();
+    //pitch = filter.getPitch();
+    //heading = filter.getYaw();
 
     //  Serial.print("Orientation: ");
     //  Serial.print(heading);
@@ -126,9 +122,14 @@ void sendSensorData() {
     //  Serial.print(" ");
     //  Serial.println(roll);
 
+    // Calculate absolute values
+    abs_acc = sqrt(ax*ax + ay*ay + az*az);
+    abs_gyro = sqrt(gx*gx + gy*gy + gz*gz);
+
     // Send 3x eulers over bluetooth as 1x byte array
-    String imuData = String(roll) + "," +  String(pitch) + "," + String(heading);
+    String imuData = String(ax) + "," +  String(ay) + "," + String(az) + "," + String(gx) + "," + String(gy) + "," + String(gz)
+                   + "," + String(abs_acc) + "," + String(abs_gyro)
+                   + "," + String(pressure) + "," + String(position) + "," + String(fsrReading_1) + "," + String(fsrReading_2);
     Serial.println(imuData);
-    imuCharacteristic.writeValue(imuData);
   }
 }
