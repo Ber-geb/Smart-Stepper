@@ -86,7 +86,7 @@ with open(file_path) as f:
                     elif c == 'z':  # ToeSitting
                         currentKey = 'z'
                         changePosition = True
-                        fileName = firstName+"ToeSitting"
+                        fileName = firstName+"_ToeSitting"
                         break
                     elif c == 'h':  # Normal Walking Up Stairs
                         currentKey = 'h'
