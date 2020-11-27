@@ -51,72 +51,72 @@ with open(file_path) as f:
                     if c == 'w':  # walking
                         currentKey = 'w'
                         changePosition = True
-                        fileName = firstName+"_NormalWalking"
+                        fileName = firstName+"_NormalWalking.txt"
                         break
                     elif c == 't':  # toe-walking
                         currentKey = 't'
                         changePosition = True
-                        fileName = firstName+"_ToeWalking"
+                        fileName = firstName+"_ToeWalking.txt"
                         break
                     elif c == 's':  # Standing
                         currentKey = 's'
                         changePosition = True
-                        fileName = firstName+"_Standing"
+                        fileName = firstName+"_Standing.txt"
                         break
                     elif c == 'p':  # ToeStanding
                         currentKey = 'p'
                         changePosition = True
-                        fileName = firstName+"_ToeStanding"
+                        fileName = firstName+"_ToeStanding.txt"
                         break
                     elif c == 'r':  # Jogging
                         currentKey = 'r'
                         changePosition = True
-                        fileName = firstName+"_Jogging"
+                        fileName = firstName+"_Jogging.txt"
                         break
                     elif c == 'y':  # ToeJogging
                         currentKey = 'y'
                         changePosition = True
-                        fileName = firstName+"_ToeJogging"
+                        fileName = firstName+"_ToeJogging.txt"
                         break
                     elif c == 'a':  # Sitting
                         currentKey = 'a'
                         changePosition = True
-                        fileName = firstName+"_Sitting"
+                        fileName = firstName+"_Sitting.txt"
                         break
                     elif c == 'z':  # ToeSitting
                         currentKey = 'z'
                         changePosition = True
-                        fileName = firstName+"_ToeSitting"
+                        fileName = firstName+"_ToeSitting.txt"
                         break
                     elif c == 'h':  # Normal Walking Up Stairs
                         currentKey = 'h'
                         changePosition = True
-                        fileName = firstName+"_NormalWalkingUpStairs"
+                        fileName = firstName+"_NormalWalkingUpStairs.txt"
                         break
                     elif c == 'i':  # Normal Walking Down Stairs
                         currentKey = 'i'
                         changePosition = True
-                        fileName = firstName+"_NormalWalkingDownStairs"
+                        fileName = firstName+"_NormalWalkingDownStairs.txt"
                         break
                     elif c == 'b':  # Toe Walking Up Stairs
                         currentKey = 'b'
                         changePosition = True
-                        fileName = firstName+"_ToeWalkingUpStairs"
+                        fileName = firstName+"_ToeWalkingUpStairs.txt"
                         break
                     elif c == 'd':  # Toe Walking Down Stairs
                         currentKey = 'd'
                         changePosition = True
-                        fileName = firstName+"_ToeWalkingDownStairs"
+                        fileName = firstName+"_ToeWalkingDownStairs.txt"
                         break
                     elif c == 'l':  # Laying Down
                         currentKey = 'l'
                         changePosition = True
-                        fileName = firstName+"_LayingDown"
+                        fileName = firstName+"_LayingDown.txt"
                         break
                     elif c == 'j':  # Jumping
                         currentKey = 'j'
                         changePosition = True
-                        fileName = firstName+"_Jumping"
+                        fileName = firstName+"_Jumping.txt"
                         break
 
             if not changePosition:
