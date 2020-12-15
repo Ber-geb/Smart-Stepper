@@ -14,9 +14,17 @@ root.withdraw()
 
 file_path = filedialog.askopenfilename()
 
-x = []
-y = []
-z = []
+ax = []
+ay = []
+az = []
+gx = []
+gy = []
+gz = []
+pP = []
+pX = []
+pY = []
+pZ = []
+
 size = 0
 
 root.destroy()
@@ -26,9 +34,16 @@ with open(file_path, 'r') as filestream:
         if len(currentline) <= 2 or currentline[0] == '-':
             continue
         else:
-            x.append(float(currentline[0]))
-            y.append(float(currentline[1]))
-            z.append(float(currentline[2]))
+            # ax.append(float(currentline[0]))
+            # ay.append(float(currentline[1]))
+            # az.append(float(currentline[2]))
+            # gx.append(float(currentline[3]))
+            # gy.append(float(currentline[4]))
+            # gz.append(float(currentline[5]))
+            pP.append(float(currentline[8]))
+            pX.append(float(currentline[9]))
+            # pY.append(float(currentline[10]))
+            # pZ.append(float(currentline[11]))
             size += 1
 
 # style
@@ -39,11 +54,18 @@ palette = plt.get_cmap('Set1')
 
 plt.title("Visual Representation of Walking Pattern")
 plt.xlabel("Time")
-plt.ylabel("Heading, Pitch, Roll")
+plt.ylabel("Pressure and Position")
 
-plt.plot(x, color="red", label="Heading(X)")
-plt.plot(y, color="blue", label="Pitch(Y)")
-plt.plot(z, color="green", label="Roll(Z)")
+# plt.plot(ax, color="red", label="Heading(X)")
+# plt.plot(ay, color="blue", label="Pitch(Y)")
+# plt.plot(az, color="green", label="Roll(Z)")
+# plt.plot(gx, color="red", label="Heading(X)")
+# plt.plot(gy, color="blue", label="Pitch(Y)")
+# plt.plot(gz, color="green", label="Roll(Z)")
+plt.plot(pP, color="red", label="FSLP Pressure")
+plt.plot(pX, color="blue", label="FSLP Position")
+# plt.plot(pY, color="blue", label="FSR 1 Pressure")
+# plt.plot(pZ, color="green", label="FSR 2 Pressure")
 
 plt.legend(loc=1, bbox_to_anchor=(1.11, 1.15), ncol=1, fontsize="small")
 plt.show()
