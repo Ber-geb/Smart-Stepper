@@ -182,6 +182,10 @@ void setup() {
   // Get pointers for the model's input and output tensors
   tflInputTensor = tflInterpreter->input(0);
   tflOutputTensor = tflInterpreter->output(0);
+  
+  // start advertising
+  BLE.advertise();
+  Serial.println("Bluetooth device active, waiting for connections...");
 }
 
 void loop() {
