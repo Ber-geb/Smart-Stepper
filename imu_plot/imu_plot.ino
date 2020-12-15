@@ -73,8 +73,8 @@ void loop() {
 //          pressure, position);
 //  Serial.print(report);
 
-  fsrReading_1 = analogRead(fsrPin_1);
-  fsrReading_2 = analogRead(fsrPin_2);
+  fsrReading_1 = analogRead(fsrPin_1); // this reading is on the toe
+  fsrReading_2 = analogRead(fsrPin_2); // this reading is on the heel
 
   sendSensorData();
 
