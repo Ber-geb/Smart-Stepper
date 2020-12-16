@@ -1,68 +1,22 @@
-#include <ArduinoBLE.h>
+//#include <ArduinoBLE.h>
 #include <Arduino_LSM9DS1.h>
-
 #include <TensorFlowLite.h>
 #include <tensorflow/lite/experimental/micro/kernels/all_ops_resolver.h>
 #include <tensorflow/lite/experimental/micro/micro_error_reporter.h>
 #include <tensorflow/lite/experimental/micro/micro_interpreter.h>
 #include <tensorflow/lite/schema/schema_generated.h>
 #include <tensorflow/lite/version.h>
-
 #include "model.h" // implement our model
 
 // --------------------------------------------------------------------------------------------------------------------- //
 // BLE Service
-BLEService imuService("917649A0-D98E-11E5-9EEC-0002A5D5C51B"); // Custom UUID
-BLEService pressureService("ca4d93da-77d9-4c0b-89fc-4e18804f79c3"); // Custom UUID
+//BLEService pressureService("ca4d93da-77d9-4c0b-89fc-4e18804f79c3"); // Custom UUID
 
-// BLE Characteristic
-// BLEStringCharacteristic imuCharacteristic("1A3AC130-31EE-758A-BC50-54A61958EF81", BLERead | BLENotify, 50);
-BLECharacteristic imuAccCharacteristic("917649A1-D98E-11E5-9EEC-0002A5D5C51B", BLERead | BLENotify, 16 );
-BLECharacteristic imuGyroCharacteristic("917649A2-D98E-11E5-9EEC-0002A5D5C51B", BLERead | BLENotify, 16 );
-BLECharacteristic fslpCharacteristic("0487a2ba-9d48-4ab4-bde2-55b14a3b18bd", BLERead | BLENotify, 8 );
-BLECharacteristic fsrCharacteristic("2d35254d-7963-47fb-aad3-5e4cc35f7d66", BLERead | BLENotify, 8 );
-
-
-// More information about descriptors and CCCD here:
-// https://www.oreilly.com/library/view/getting-started-with/9781491900550/ch04.html#gatt_cccd
-
-BLEDescriptor imuAccDescriptor("2902", "block");
-BLEDescriptor imuGyroDescriptor("2902", "block");
-BLEDescriptor fslpDescriptor("2902", "block");
-BLEDescriptor fsrDescriptor("2902", "block");
-
-/**
-  The union directive allows 3 variables to share the same memory location. Please see the
-  tutorial covering this project for further discussion of the use of the union
-  directive in C. https://www.hackster.io/gov/imu-to-you-ae53e1
-*/
-union
-{
-  float a[4];
-  unsigned char bytes[16];
-} accData;
-
-union
-{
-  float g[4];
-  unsigned char bytes[16];
-} gyroData;
-
-union
-{
-  int fslp[2];
-  unsigned char bytes[8];
-} fslpData;
-
-union
-{
-  int fsr[2];
-  unsigned char bytes[8];
-} fsrData;
+//BLECharacteristic fslpCharacteristic("0487a2ba-9d48-4ab4-bde2-55b14a3b18bd", BLERead | BLENotify, 8 );
+//BLECharacteristic fsrCharacteristic("2d35254d-7963-47fb-aad3-5e4cc35f7d66", BLERead | BLENotify, 8 ); 
 
 // --------------------------------------------------------------------------------------------------------------------- //
 
-const float ACCELERATION_RMS_THRESHOLD = 2.0;  // RMS (root mean square) threshold of significant motion in G's -- might not need this..
 const int NUM_CAPTURED_SAMPLES_PER_GESTURE = 119 * 2; // We have 12 features/gestures, 119 is the sampling rate
 const int NUM_FEATURES_PER_SAMPLE = 8; // ax, ay, az, gx, gy, gz, abs_accel, abs_gyro, Pp, Px, P1, P2
 const int TOTAL_SAMPLES = NUM_CAPTURED_SAMPLES_PER_GESTURE * NUM_FEATURES_PER_SAMPLE;
@@ -119,10 +73,10 @@ void setup() {
     while (1);
   }
 
-  if (!BLE.begin()) {
-    Serial.println("starting BLE failed!");
-    while (1);
-  }
+//  if (!BLE.begin()) {
+//    Serial.println("starting BLE failed!");
+//    while (1);
+//  }
 
   // print out the samples rates of the IMUs
   Serial.print("Accelerometer sample rate = ");
@@ -135,31 +89,12 @@ void setup() {
   Serial.println();
 
   // Setup bluetooth
-  BLE.setLocalName("ArduinoIMU");
-  BLE.setAdvertisedServiceUuid(imuService.uuid());  // add the service UUID
-  BLE.setAdvertisedServiceUuid(pressureService.uuid());
-  imuService.addCharacteristic(imuAccCharacteristic);
-  imuAccCharacteristic.addDescriptor(imuAccDescriptor);
-  imuService.addCharacteristic(imuGyroCharacteristic);
-  imuGyroCharacteristic.addDescriptor(imuGyroDescriptor);
-  pressureService.addCharacteristic(fslpCharacteristic);
-  fslpCharacteristic.addDescriptor(fslpDescriptor);
-  pressureService.addCharacteristic(fsrCharacteristic);
-  fsrCharacteristic.addDescriptor(fsrDescriptor);
-  BLE.addService(imuService);
-  BLE.addService(pressureService);
-
-  // All characteristics should be initialized to a starting value prior
-  // using them.
-  const unsigned char initializerAcc[16] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-  const unsigned char initializerGyro[16] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-  const unsigned char initializerFSLP[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
-  const unsigned char initializerFSR[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
-
-  imuAccCharacteristic.setValue( initializerAcc, 16);
-  imuGyroCharacteristic.setValue( initializerGyro, 16 );
-  fslpCharacteristic.setValue( initializerFSLP, 8 );
-  fsrCharacteristic.setValue( initializerFSR, 8 );
+//  BLE.setLocalName("Smart Stepper"); // changed the BLE local name to our project name
+//  pressureService.addCharacteristic(fslpCharacteristic);
+//  fslpCharacteristic.addDescriptor(fslpDescriptor);
+//  pressureService.addCharacteristic(fsrCharacteristic);
+//  fsrCharacteristic.addDescriptor(fsrDescriptor);
+//  BLE.addService(pressureService);
 
   // get the TFL representation of the model byte array
   tflModel = tflite::GetModel(model);
@@ -172,7 +107,6 @@ void setup() {
   tflInterpreter = new tflite::MicroInterpreter(tflModel, tflOpsResolver, tensorArena, tensorArenaSize, &tflErrorReporter);
 
   // Allocate memory for the model's input and output tensors
-  // **if error occurs, might need to adjust tensor arena size
   TfLiteStatus allocate_status = tflInterpreter->AllocateTensors();
   if (allocate_status != kTfLiteOk) {
     Serial.println("AllocateTensors() failed.");
@@ -189,18 +123,18 @@ void loop() {
   float abs_acc, abs_gyro;
 
   // wait for a BLE central
-  BLEDevice central = BLE.central();
+//  BLEDevice central = BLE.central();
 
   // if a BLE central is connected to the peripheral:
-  if (central) {
+//  if (central) {
     Serial.print("Connected to central: ");
     // print the central's BT address:
-    Serial.println(central.address());
+//    Serial.println(central.address());
     // turn on the LED to indicate the connection:
     digitalWrite(LED_BUILTIN, HIGH);
 
     // while the central is connected:
-    while (central.connected()) {
+//    while (central.connected()) {
       // collect the remaining samples
       while (capturedSamples < TOTAL_SAMPLES) {
         // You can grab the data from here to send via BLE onto the App. Accel/Gyro and pressure sensor values are being calculated and sampled here.
@@ -227,58 +161,11 @@ void loop() {
             position = fslpGetPosition();  // Raw reading, from 0 to 1023.
           }
 
-          /**
-            convert the raw gyro & accelerometer data to degrees/second and assign them to the elements of
-            the float array in the union representing the gyroscope & accelerometer data.
-          */
-
-          gyroData.g[0] = gX;
-          gyroData.g[1] = gY;
-          gyroData.g[2] = gZ;
-          gyroData.g[3] = abs_gyro;
-
-          accData.a[0] = aX;
-          accData.a[1] = aY;
-          accData.a[2] = aZ;
-          accData.a[2] = abs_acc;
-
-          fslpData.fslp[0] = int(pressure);
-          fslpData.fslp[1] = int(position);
-
-          fsrData.fsr[0] = fsrReading_1;
-          fsrData.fsr[1] = fsrReading_2;
-
           // get fsr readings
           fsrReading_1 = analogRead(fsrPin_1);  // this reading is from the toe
           fsrReading_2 = analogRead(fsrPin_2);  // this reading is from the heel
 
-          /**
-            The following two statements have the potential to cuase the most confusion. Please see the tutorial for
-            more on this.
-            What we are doing here is casting our union variables into a pointer of unsigned characters in
-            order to allow us to pass the array of bytes to the setValue() function.
-          */
-          unsigned char *acc = (unsigned char *)&accData;
-          unsigned char *gyro = (unsigned char *)&gyroData;
-          unsigned char *fslp = (unsigned char *)&fslpData;
-          unsigned char *fsr = (unsigned char *)&fsrData;
-
-          /**
-             Setting the values here will cause the notification mechanism on the moible app
-             side to be enacted.
-          */
-          imuAccCharacteristic.setValue( acc, 16 );
-          imuGyroCharacteristic.setValue( gyro, 16 );
-          fslpCharacteristic.setValue( fslp, 8 );
-          fsrCharacteristic.setValue( fsr, 8 );
-
-
-
           // insert the new data
-          // we are only sending accel/gryo & abs accel/gyro in the TensorFlow input array
-          // to determine the classification of the movement via Machine Learning
-          // we are not including the pressure sensor values because OUR model does not work
-          // the guy's model is ONLY for accelerometer and gyroscope values
           tflInputTensor->data.f[capturedSamples + 0] = (aX + 4.0) / 8.0;
           tflInputTensor->data.f[capturedSamples + 1] = (aY + 4.0) / 8.0;
           tflInputTensor->data.f[capturedSamples + 2] = (aZ + 4.0) / 8.0;
@@ -287,7 +174,6 @@ void loop() {
           tflInputTensor->data.f[capturedSamples + 5] = (gZ + 2000.0) / 4000.0;
           tflInputTensor->data.f[capturedSamples + 6] = (abs_acc + 4) / 8.0;
           tflInputTensor->data.f[capturedSamples + 7] = (abs_gyro + 2000.0) / 4000.0;
-
 
           capturedSamples += NUM_FEATURES_PER_SAMPLE;
         }
@@ -311,12 +197,12 @@ void loop() {
 
       capturedSamples = 0;
       Serial.println();
-    }
+//    } while(central.connected())...
     // when the central disconnects, turn off the LED:
     digitalWrite(LED_BUILTIN, LOW);
     Serial.print("Disconnected from central: ");
-    Serial.println(central.address());
-  }
+//    Serial.println(central.address());
+//  } if(central)...
 }
 
 
